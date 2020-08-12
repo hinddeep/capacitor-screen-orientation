@@ -1,6 +1,7 @@
 # Ionic Capacitor Screen Orientation
 
 For detailed tutorial on how to use this plugin visit:
+https://medium.com/@hinddeep.purohit007/handling-screen-orientation-changes-in-capacitor-apps-19fe339578a6 
 
 Platforms Supported: Android, iOS
 
