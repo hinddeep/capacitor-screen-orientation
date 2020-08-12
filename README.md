@@ -3,6 +3,8 @@
 For detailed tutorial on how to use this plugin visit:
 https://medium.com/@hinddeep.purohit007/handling-screen-orientation-changes-in-capacitor-apps-19fe339578a6 
 
+Demo Application: https://github.com/hinddeep/Demo-Ionic-Screen_Orientation
+
 Platforms Supported: Android, iOS
 
 The Capacitor plugin I’ve developed can be used to detect the current of orientation of the screen, lock the screen in a particular orientation (disable auto-rotate) or unlock screen rotation (enable auto-rotate) and to listen for orientation changes.
