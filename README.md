@@ -53,6 +53,8 @@ func application(\_ application: UIApplication, supportedInterfaceOrientationsFo
 return self.orientationLock <br/>
 } <br/>
 
+On iOS, the lockScreenOrientation() function will only rotate the UI to the desired position. The locking needs to be accomplished in the AppDelegate. 
+
 Supported Orientations: <br/>
 
 1. all: all orientations <br/>
