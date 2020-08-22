@@ -6,4 +6,6 @@
 CAP_PLUGIN(ScreenOrientation, "ScreenOrientation",
            CAP_PLUGIN_METHOD(getScreenOrientation, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(lockScreenOrientation, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(unlockScreenOrientation, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(rotateTo, CAPPluginReturnPromise);
 )

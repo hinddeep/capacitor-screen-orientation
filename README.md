@@ -1,7 +1,7 @@
 # Ionic Capacitor Screen Orientation
 
 For detailed tutorial on how to use this plugin visit:
-https://medium.com/@hinddeep.purohit007/handling-screen-orientation-changes-in-capacitor-apps-19fe339578a6 
+https://medium.com/@hinddeep.purohit007/handling-screen-orientation-changes-in-capacitor-apps-19fe339578a6
 
 Demo Application: https://github.com/hinddeep/Demo-Ionic-Screen_Orientation
 
@@ -53,7 +53,34 @@ func application(\_ application: UIApplication, supportedInterfaceOrientationsFo
 return self.orientationLock <br/>
 } <br/>
 
-On iOS, the lockScreenOrientation() function will only rotate the UI to the desired position. The locking needs to be accomplished in the AppDelegate. 
+@objc func setOrientationLock(_ notification: Notification) <br/>
+    { <br/>
+        if let data = notification.userInfo as? [String: Int] <br/>
+        { <br/>
+            for  (_, mask) in data <br/>
+            { <br/>
+                switch mask <br/>
+                { <br/>
+                    case 1: self.orientationLock = UIInterfaceOrientationMask.portrait <br/>
+                        break; <br/>
+                    case 2: self.orientationLock = UIInterfaceOrientationMask.portraitUpsideDown <br/>
+                        break; <br/>
+                    case 3: self.orientationLock = UIInterfaceOrientationMask.landscapeRight <br/>
+                        break; <br/>
+                    case 4: self.orientationLock = UIInterfaceOrientationMask.landscapeLeft <br/>
+                        break; <br/>
+                    case 5: self.orientationLock = UIInterfaceOrientationMask.landscape <br/>
+                        break; <br/>
+                default: self.orientationLock = UIInterfaceOrientationMask.all <br/>
+                } <br/>
+            } <br/>
+        } <br/>
+    } <br/>
+
+3. Locate: "func application(\_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {" <br/>
+4. Add the following code inside the function: <br/>
+   NotificationCenter.default.addObserver(self, selector: #selector(self.setOrientationLock), name: NSNotification.Name(rawValue: "CAPOrientationLocked"), object: nil) <br/>
+
 
 Supported Orientations: <br/>
 
@@ -109,3 +136,11 @@ Supported values for screen_orientation_lock variable: <br/>
    this.screen_orientation_event = data.orientation; <br/>
    }); <br/>
    } <br/>
+
+# Rotate to a specific orientation (without locking the orientation): 
+NOTE: NOT supported on Android <br/>
+async rotate() { <br/>
+    await ScreenOrientation.rotateTo({ <br/>
+      orientation: this.rotateTo, <br/>
+    }); <br/>
+  } <br/>

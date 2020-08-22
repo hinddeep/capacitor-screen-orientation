@@ -52,27 +52,78 @@ NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), 
     }
     
     @objc public func lockScreenOrientation(_ call: CAPPluginCall) {
-        
        DispatchQueue.main.async {
         let orientation = call.getString("orientation") ?? ""
         var value: Int
         value = 0
+        var lock = ["orientation":0]
         switch orientation {
-                case "LANDSCAPE_PRIMARY":
-                    value = UIInterfaceOrientation.landscapeLeft.rawValue
+                case "PORTRAIT":
+                    value = UIInterfaceOrientation.portrait.rawValue
                     break
                 case "PORTRAIT_PRIMARY":
                     value = UIInterfaceOrientation.portrait.rawValue
                     break
+                case "PORTRAIT_SECONDARY":
+                    value = UIInterfaceOrientation.portraitUpsideDown.rawValue
+                    break
+                case "LANDSCAPE":
+                    value = 5
+                    break
+                case "LANDSCAPE_PRIMARY":
+                    value = UIInterfaceOrientation.landscapeLeft.rawValue
+                    break
                 case "LANDSCAPE_SECONDARY":
                     value = UIInterfaceOrientation.landscapeRight.rawValue
                     break
-                case "PORTRAIT_SECONDARY":
-                    value = UIInterfaceOrientation.portraitUpsideDown.rawValue
+                case "CURRENT":
+                    value = UIDevice.current.orientation.rawValue
                     break
                 default:
                     print("UNSPECIFIED")
                 }
+        lock = ["orientation":value]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CAPOrientationLocked"), object: self, userInfo: lock )
+            UIDevice.current.setValue(value, forKey: "orientation")
+            UINavigationController.attemptRotationToDeviceOrientation()
+        }
+    }
+    
+     @objc public func unlockScreenOrientation(_ call: CAPPluginCall) {
+        let lock = ["orientation":0]
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CAPOrientationLocked"), object: self, userInfo: lock )
+    }
+    
+    @objc public func rotateTo(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+               let orientation = call.getString("orientation") ?? ""
+               var value: Int
+               value = 0
+               switch orientation {
+                       case "PORTRAIT":
+                           value = UIInterfaceOrientation.portrait.rawValue
+                           break
+                       case "PORTRAIT_PRIMARY":
+                           value = UIInterfaceOrientation.portrait.rawValue
+                           break
+                       case "PORTRAIT_SECONDARY":
+                           value = UIInterfaceOrientation.portraitUpsideDown.rawValue
+                           break
+                       case "LANDSCAPE":
+                           value = 5
+                           break
+                       case "LANDSCAPE_PRIMARY":
+                           value = UIInterfaceOrientation.landscapeLeft.rawValue
+                           break
+                       case "LANDSCAPE_SECONDARY":
+                           value = UIInterfaceOrientation.landscapeRight.rawValue
+                           break
+                       case "CURRENT":
+                           value = UIDevice.current.orientation.rawValue
+                           break
+                       default:
+                           print("UNSPECIFIED")
+                       }
             UIDevice.current.setValue(value, forKey: "orientation")
             UINavigationController.attemptRotationToDeviceOrientation()
         }
