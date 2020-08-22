@@ -1,6 +1,7 @@
 package com.bkon.capacitor.screenorientation;
 
 import android.content.pm.ActivityInfo;
+import android.util.Log;
 import android.view.Surface;
 
 import com.getcapacitor.JSObject;
@@ -68,6 +69,11 @@ public class ScreenOrientation extends Plugin {
     @PluginMethod
     public void unlockScreenOrientation(PluginCall call) {
         getBridge().getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    @PluginMethod
+    public void rotateTo(PluginCall call) {
+       Log.i("capacitor","rotateTo is not supported on Android");
     }
 
     @Override
