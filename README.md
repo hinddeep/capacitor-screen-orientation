@@ -99,6 +99,9 @@ Supported Orientations: <br/>
 Open app.component.ts file and import the plugin as follows: <br/>
 <i> import { Plugins } from "@capacitor/core";</i> <br/>
 <i> const { ScreenOrientation } = Plugins;</i> <br/>
+<i> import 'capacitor-screen-orientation' </i> <br/>
+
+<b> SPECIAL NOTE: Remove import 'capacitor-screen-orientation' when compiling app for Android. </b> <br/>
 
 # Handle screen orientation:
 
