@@ -101,7 +101,7 @@ Open app.component.ts file and import the plugin as follows: <br/>
 <i> const { ScreenOrientation } = Plugins;</i> <br/>
 <i> import 'capacitor-screen-orientation' </i> <br/>
 
-<b> SPECIAL NOTE: Remove import 'capacitor-screen-orientation' when compiling app for Android. </b> <br/>
+<b> SPECIAL NOTE: Remove import 'capacitor-screen-orientation' when compiling app for Android and iOS. THe native plugin will not be invoked if you forget to remove the import statement before building for Android and iOS Platform.  </b> <br/>
 
 # Handle screen orientation:
 
